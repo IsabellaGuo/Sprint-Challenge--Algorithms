@@ -97,8 +97,36 @@ class SortingRobot:
         Sort the robot's list.
         """
         # Fill this out
-        pass
+        while True:
+            # Pick the item at current location
+            self.swap_item()
 
+            # Move right if it can move right
+            # this will move the biggest item to the end of the list
+            # In the meanwhile, find the lowest possible value
+            while self.can_move_right():
+                self.move_right()
+
+                # swap if the item's value in hands is greater
+                if self.compare_item() == 1:
+                    self.swap_item()
+
+            # When None at the end, means the list is sorted
+            if self.compare_item() is None:
+                self.swap_item()
+                break
+            # Move left if it can move left
+            # this will move smaller items to beginning of the list
+            while self.can_move_left():
+                self.move_left()
+
+                if self.compare_item() is None:
+                    self.swap_item()
+                    break
+ 
+            # start again, move the pointer by 1
+            if self.can_move_right():
+                self.move_right()
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
